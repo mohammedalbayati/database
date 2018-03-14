@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 12. Mrz 2018 um 14:21
--- Server-Version: 10.1.30-MariaDB
--- PHP-Version: 7.2.1
+-- Generation Time: Mar 14, 2018 at 10:37 AM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,27 +19,37 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `projekt3_group_4`
+-- Database: `projekt3_group_4`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `intervals`
+-- Table structure for table `intervals`
 --
 
 CREATE TABLE `intervals` (
   `interval_id` int(11) NOT NULL,
   `interval_name` varchar(100) DEFAULT NULL,
   `interval_description` varchar(255) DEFAULT NULL,
+  `length` int(10) UNSIGNED NOT NULL,
   `interval_color` varchar(50) DEFAULT NULL,
-  `fk_media_id` int(11) NOT NULL
+  `fk_media_id` int(11) DEFAULT NULL,
+  `fk_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intervals`
+--
+
+INSERT INTO `intervals` (`interval_id`, `interval_name`, `interval_description`, `length`, `interval_color`, `fk_media_id`, `fk_user_id`) VALUES
+(3, '70% power run fo sho', 'over 4k method 70% power run very very run', 120, NULL, 1, 7),
+(4, '12312412124', '124124124124', 12312, 'asfasfs', NULL, 7);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `interval_media`
+-- Table structure for table `interval_media`
 --
 
 CREATE TABLE `interval_media` (
@@ -50,7 +60,7 @@ CREATE TABLE `interval_media` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `interval_tags`
+-- Table structure for table `interval_tags`
 --
 
 CREATE TABLE `interval_tags` (
@@ -61,7 +71,7 @@ CREATE TABLE `interval_tags` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `media`
+-- Table structure for table `media`
 --
 
 CREATE TABLE `media` (
@@ -72,7 +82,7 @@ CREATE TABLE `media` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `sets`
+-- Table structure for table `sets`
 --
 
 CREATE TABLE `sets` (
@@ -83,21 +93,33 @@ CREATE TABLE `sets` (
   `fk_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `sets`
+--
+
+INSERT INTO `sets` (`set_id`, `set_name`, `set_description`, `set_color`, `fk_user_id`) VALUES
+(2, 'weight training', 'super ez', '#414af4', 4),
+(13, 'asdasgfasfas', 'gadgdfgdf', NULL, 6),
+(14, 'gdfgdfg', 'gdfgdf', NULL, 6),
+(15, 'asdfafa', '123', NULL, 7),
+(16, 'l;hkj', 'hjkhjk', NULL, 5);
+
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `sets_intervals`
+-- Table structure for table `sets_intervals`
 --
 
 CREATE TABLE `sets_intervals` (
   `fk_set_id` int(11) NOT NULL,
-  `fk_user_id` int(11) NOT NULL
+  `fk_interval_id` int(11) NOT NULL,
+  `order` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `set_tags`
+-- Table structure for table `set_tags`
 --
 
 CREATE TABLE `set_tags` (
@@ -108,7 +130,7 @@ CREATE TABLE `set_tags` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `tags`
+-- Table structure for table `tags`
 --
 
 CREATE TABLE `tags` (
@@ -119,7 +141,7 @@ CREATE TABLE `tags` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -130,151 +152,158 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Daten für Tabelle `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_pass`) VALUES
 (1, 'mohammed', 'mohammed@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
-(2, 'martin', 'martin@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92');
+(2, 'martin', 'martin@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(4, 'primoz2', 'primoz@gmail.com', ''),
+(5, 'lorand', 'lorand.kovacs@gmail.com', '8ce1cfd564cd2a254cfd15d52a99b9d1b56296f0fb705aa860def6de0966d017'),
+(6, 'lorand', 'lorand.kovacs024@gmail.com', '8ce1cfd564cd2a254cfd15d52a99b9d1b56296f0fb705aa860def6de0966d017'),
+(7, 'primoz', 'pri@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(8, 'david', 'david@gmail.com', '1411242b2139f9fa57a802e1dc172e3e1ca7655ac2d06d83b22958951072261b');
 
 --
--- Indizes der exportierten Tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indizes für die Tabelle `intervals`
+-- Indexes for table `intervals`
 --
 ALTER TABLE `intervals`
   ADD PRIMARY KEY (`interval_id`),
-  ADD KEY `fk_media_id` (`fk_media_id`);
+  ADD KEY `fk_media_id` (`fk_media_id`),
+  ADD KEY `fk_user_id` (`fk_user_id`);
 
 --
--- Indizes für die Tabelle `interval_media`
+-- Indexes for table `interval_media`
 --
 ALTER TABLE `interval_media`
   ADD KEY `fk_interval_id` (`fk_interval_id`),
   ADD KEY `fk_media_id` (`fk_media_id`);
 
 --
--- Indizes für die Tabelle `interval_tags`
+-- Indexes for table `interval_tags`
 --
 ALTER TABLE `interval_tags`
   ADD KEY `fk_tag_id` (`fk_tag_id`),
   ADD KEY `fk_interval_id` (`fk_interval_id`);
 
 --
--- Indizes für die Tabelle `media`
+-- Indexes for table `media`
 --
 ALTER TABLE `media`
   ADD PRIMARY KEY (`media_id`);
 
 --
--- Indizes für die Tabelle `sets`
+-- Indexes for table `sets`
 --
 ALTER TABLE `sets`
   ADD PRIMARY KEY (`set_id`),
   ADD KEY `fk_user_id` (`fk_user_id`);
 
 --
--- Indizes für die Tabelle `sets_intervals`
+-- Indexes for table `sets_intervals`
 --
 ALTER TABLE `sets_intervals`
   ADD KEY `fk_set_id` (`fk_set_id`),
-  ADD KEY `fk_user_id` (`fk_user_id`);
+  ADD KEY `fk_interval_id` (`fk_interval_id`) USING BTREE;
 
 --
--- Indizes für die Tabelle `set_tags`
+-- Indexes for table `set_tags`
 --
 ALTER TABLE `set_tags`
   ADD KEY `fk_tag_id` (`fk_tag_id`),
   ADD KEY `fk_set_id` (`fk_set_id`);
 
 --
--- Indizes für die Tabelle `tags`
+-- Indexes for table `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`tag_id`);
 
 --
--- Indizes für die Tabelle `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `userEmail` (`user_email`);
 
 --
--- AUTO_INCREMENT für exportierte Tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT für Tabelle `intervals`
+-- AUTO_INCREMENT for table `intervals`
 --
 ALTER TABLE `intervals`
-  MODIFY `interval_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `interval_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT für Tabelle `media`
+-- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
   MODIFY `media_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT für Tabelle `sets`
+-- AUTO_INCREMENT for table `sets`
 --
 ALTER TABLE `sets`
-  MODIFY `set_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `set_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT für Tabelle `tags`
+-- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
   MODIFY `tag_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT für Tabelle `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints der exportierten Tabellen
+-- Constraints for dumped tables
 --
 
 --
--- Constraints der Tabelle `intervals`
+-- Constraints for table `intervals`
 --
 ALTER TABLE `intervals`
-  ADD CONSTRAINT `intervals_ibfk_1` FOREIGN KEY (`fk_media_id`) REFERENCES `media` (`media_id`);
+  ADD CONSTRAINT `intervals_ibfk_1` FOREIGN KEY (`fk_media_id`) REFERENCES `media` (`media_id`),
+  ADD CONSTRAINT `intervals_ibfk_2` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints der Tabelle `interval_media`
+-- Constraints for table `interval_media`
 --
 ALTER TABLE `interval_media`
   ADD CONSTRAINT `interval_media_ibfk_1` FOREIGN KEY (`fk_interval_id`) REFERENCES `intervals` (`interval_id`),
   ADD CONSTRAINT `interval_media_ibfk_2` FOREIGN KEY (`fk_media_id`) REFERENCES `media` (`media_id`);
 
 --
--- Constraints der Tabelle `interval_tags`
+-- Constraints for table `interval_tags`
 --
 ALTER TABLE `interval_tags`
   ADD CONSTRAINT `interval_tags_ibfk_1` FOREIGN KEY (`fk_tag_id`) REFERENCES `tags` (`tag_id`),
   ADD CONSTRAINT `interval_tags_ibfk_2` FOREIGN KEY (`fk_interval_id`) REFERENCES `intervals` (`interval_id`);
 
 --
--- Constraints der Tabelle `sets`
+-- Constraints for table `sets`
 --
 ALTER TABLE `sets`
   ADD CONSTRAINT `sets_ibfk_1` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints der Tabelle `sets_intervals`
+-- Constraints for table `sets_intervals`
 --
 ALTER TABLE `sets_intervals`
   ADD CONSTRAINT `sets_intervals_ibfk_1` FOREIGN KEY (`fk_set_id`) REFERENCES `sets` (`set_id`),
-  ADD CONSTRAINT `sets_intervals_ibfk_2` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `sets_intervals_ibfk_2` FOREIGN KEY (`fk_interval_id`) REFERENCES `intervals` (`interval_id`);
 
 --
--- Constraints der Tabelle `set_tags`
+-- Constraints for table `set_tags`
 --
 ALTER TABLE `set_tags`
   ADD CONSTRAINT `set_tags_ibfk_1` FOREIGN KEY (`fk_tag_id`) REFERENCES `tags` (`tag_id`),
