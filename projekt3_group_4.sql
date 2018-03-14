@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2018 at 10:37 AM
+-- Generation Time: Mar 14, 2018 at 02:11 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -44,7 +44,14 @@ CREATE TABLE `intervals` (
 
 INSERT INTO `intervals` (`interval_id`, `interval_name`, `interval_description`, `length`, `interval_color`, `fk_media_id`, `fk_user_id`) VALUES
 (3, '70% power run fo sho', 'over 4k method 70% power run very very run', 120, NULL, 1, 7),
-(4, '12312412124', '124124124124', 12312, 'asfasfs', NULL, 7);
+(4, '12312412124', '124124124124', 12312, 'asfasfs', NULL, 7),
+(5, 'h', 'h', 20, '', NULL, 5),
+(6, 'weer', 'wer', 123, 'black', NULL, 5),
+(7, 'bl', 'bl', 45, 'bl', NULL, 5),
+(8, 'aa', 'aa', 21, '', NULL, 5),
+(9, 'aaaaaaaa', 'aaaaaaaaaa', 12, '', NULL, 5),
+(10, '3', '2', 2, '2', NULL, 5),
+(11, 'what', 'what', 120, '2', NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -102,7 +109,9 @@ INSERT INTO `sets` (`set_id`, `set_name`, `set_description`, `set_color`, `fk_us
 (13, 'asdasgfasfas', 'gadgdfgdf', NULL, 6),
 (14, 'gdfgdfg', 'gdfgdf', NULL, 6),
 (15, 'asdfafa', '123', NULL, 7),
-(16, 'l;hkj', 'hjkhjk', NULL, 5);
+(16, 'l;hkj', 'hjkhjk', NULL, 5),
+(17, 'asdadasd', 'asdsadasd', NULL, 5),
+(18, '234', 'ggff', NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -115,6 +124,15 @@ CREATE TABLE `sets_intervals` (
   `fk_interval_id` int(11) NOT NULL,
   `order` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sets_intervals`
+--
+
+INSERT INTO `sets_intervals` (`fk_set_id`, `fk_interval_id`, `order`) VALUES
+(13, 4, 1),
+(18, 6, 1),
+(18, 8, 2);
 
 -- --------------------------------------------------------
 
@@ -238,7 +256,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `intervals`
 --
 ALTER TABLE `intervals`
-  MODIFY `interval_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `interval_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `media`
@@ -250,7 +268,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `sets`
 --
 ALTER TABLE `sets`
-  MODIFY `set_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `set_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tags`
